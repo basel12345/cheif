@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 	ngOnInit() {
 	}
 
-	addOrder() {
+	addorder() {
 		this.router.navigate(['/pages/manger/home/add-order']);
 	}
  
