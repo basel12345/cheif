@@ -1,0 +1,59 @@
+<div class="accordions-container row">
+	<div class="accordion-container col-md-12 col-lg-12 col-xxxl-12">
+		<nb-accordion>
+			<nb-accordion-item #item>
+				<nb-accordion-item-header>
+					إعدادات البحث
+				</nb-accordion-item-header>
+				<nb-accordion-item-body>
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="minDate">من تاريخ</label>
+								<input type="date" id="minDate" [(ngModel)]="Filter.minDate" name="minDate"
+									class="form-control">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="maxDate"> الي تاريخ</label>
+								<input type="date" id="maxDate" [(ngModel)]="Filter.maxDate" name="maxDate"
+									class="form-control">
+							</div>
+						</div>
+					</div>
+					<button type="button" (click)="Search()" class="btn btn-success mr-1 ml-1">بحث</button>
+				</nb-accordion-item-body>
+			</nb-accordion-item>
+		</nb-accordion>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-md-12 ">
+		<nb-card>
+			<nb-card-header>
+				المشتريات
+			</nb-card-header>
+			<nb-card-body>
+				<table class="table table-bordered" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>التاريخ</th>
+							<th>القيمه </th>
+							<th>مكونات المشتريات </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let res of FilteredRows"> 
+							<td>{{res.date}}</td>
+							<td>{{res.value}}</td>
+							<td>{{res.purchases}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div>مجموع المشتريات : {{total}}</div>
+			</nb-card-body>
+		</nb-card>
+	</div>
+</div>

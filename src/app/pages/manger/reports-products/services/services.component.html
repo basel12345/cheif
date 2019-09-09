@@ -1,0 +1,74 @@
+<div class="accordions-container row">
+	<div class="accordion-container col-md-12 col-lg-12 col-xxxl-12">
+		<nb-accordion>
+			<nb-accordion-item #item>
+				<nb-accordion-item-header>
+					إعدادات البحث
+				</nb-accordion-item-header>
+				<nb-accordion-item-body>
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="product"> اسم الصنف</label>
+								<input type="text" id="product" [(ngModel)]="Filter.product" name="product"
+									class="form-control">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="cost"> سعر تكلفة الصنف</label>
+								<input type="text" id="cost" [(ngModel)]="Filter.cost" name="cost" class="form-control">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="price"> سعر البيع</label>
+								<input type="text" id="price" [(ngModel)]="Filter.price" name="price"
+									class="form-control">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="ingredients"> المكونات</label>
+								<input type="text" id="ingredients" [(ngModel)]="Filter.ingredients" name="ingredients"
+									class="form-control">
+							</div>
+						</div>
+					</div>
+					<button type="button" (click)="Search()" class="btn btn-success mr-1 ml-1">بحث</button>
+				</nb-accordion-item-body>
+			</nb-accordion-item>
+		</nb-accordion>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-md-12 ">
+		<nb-card>
+			<nb-card-header>
+				الحدمات
+			</nb-card-header>
+			<nb-card-body>
+				<table class="table table-bordered" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>اسم الصنف</th>
+							<th>سعر تكلفة الصنف </th>
+							<th>سعر البيع </th>
+							<th>المكونات</th>
+						</tr>
+					</thead>
+					<!-- <tbody>
+								<tr> 
+									<td></td> 
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody> -->
+				</table>
+				<!-- <button class="btn btn-success ml-1 mr-1" (click)="print()">طباعة</button> -->
+			</nb-card-body>
+		</nb-card>
+	</div>
+</div>

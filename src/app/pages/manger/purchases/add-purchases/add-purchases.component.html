@@ -1,0 +1,57 @@
+<div>
+	<nb-card>
+		<nb-card-header>اضافة مشروبات</nb-card-header>
+		<nb-card-body>
+			<form #frm="ngForm" (ngSubmit)="save(frm)">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="date">التاريخ</label>
+							<input type="date" class="form-control" id="date" #date="ngModel"
+								[(ngModel)]="Purchases.date" name="product"
+								[ngClass]="{ 'is-invalid': frm.submitted && !date.valid }" required>
+							<div *ngIf="frm.submitted && !date.valid" class="invalid-feedback">
+								<div *ngIf="frm.submitted && !date.valid">
+									<nb-alert status="danger"> برجاء إدخال
+										التاريخ
+									</nb-alert>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="value">القيمه</label>
+							<input type="number" class="form-control" id="value" #value="ngModel"
+								[(ngModel)]="Purchases.value" name="value"
+								[ngClass]="{ 'is-invalid': frm.submitted && !value.valid }" required>
+							<div *ngIf="frm.submitted && !value.valid" class="invalid-feedback">
+								<div *ngIf="frm.submitted && !value.valid">
+									<nb-alert status="danger"> برجاء إدخال
+										القيمه
+									</nb-alert>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="ingredients">المكونات</label>
+							<textarea class="form-control" id="ingredients" cols="30" rows="10" #ingredients="ngModel"
+								[(ngModel)]="Purchases.ingredients" name="ingredients"
+								[ngClass]="{ 'is-invalid': frm.submitted && !ingredients.valid }" required></textarea>
+							<div *ngIf="frm.submitted && !ingredients.valid" class="invalid-feedback">
+								<div *ngIf="frm.submitted && !ingredients.valid">
+									<nb-alert status="danger"> برجاء إدخال
+										المكونات
+									</nb-alert>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">اضافة</button>
+			</form>
+		</nb-card-body>
+	</nb-card>
+</div>

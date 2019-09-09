@@ -1,0 +1,62 @@
+<div>
+	<nb-card>
+		<nb-card-header>اضافة الطعام</nb-card-header> 
+		<nb-card-body>
+			<form #frm="ngForm" (ngSubmit)="save(frm)">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="product">اسم الصنف</label>
+							<input type="text" class="form-control" id="product" #product="ngModel"
+								[(ngModel)]="Food.product" name="product"
+								[ngClass]="{ 'is-invalid': frm.submitted && !product.valid }" required>
+							<div *ngIf="frm.submitted && !product.valid" class="invalid-feedback">
+								<nb-alert status="danger" *ngIf="frm.submitted && !product.valid"> برجاء إدخال اسم
+									الصنف</nb-alert>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="cost">سعر تكلفة الصنف</label>
+							<input type="text" class="form-control" id="cost" #cost="ngModel" [(ngModel)]="Food.cost"
+								name="cost" [ngClass]="{ 'is-invalid': frm.submitted && !cost.valid }" required>
+							<div *ngIf="frm.submitted && !cost.valid" class="invalid-feedback">
+								<nb-alert status="danger" *ngIf="frm.submitted && !cost.valid"> برجاء إدخال سعر تكلفة
+									الصنف</nb-alert>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="price">سعر البيع</label>
+							<input type="text" class="form-control" id="price" #price="ngModel"
+								[(ngModel)]="Food.price" name="price"
+								[ngClass]="{ 'is-invalid': frm.submitted && !price.valid }" required>
+							<div *ngIf="frm.submitted && !price.valid" class="invalid-feedback">
+								<nb-alert status="danger" *ngIf="frm.submitted && !price.valid"> برجاء إدخال سعر البيع
+								</nb-alert>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="ingredients">المكونات</label>
+							<textarea class="form-control" id="ingredients" cols="30" rows="10" #ingredients="ngModel"
+								[(ngModel)]="Food.ingredients" name="ingredients"
+								[ngClass]="{ 'is-invalid': frm.submitted && !ingredients.valid }" required></textarea>
+							<div *ngIf="frm.submitted && !ingredients.valid" class="invalid-feedback">
+								<nb-alert status="danger" *ngIf="frm.submitted && !ingredients.valid"> برجاء إدخال
+									المكونات
+								</nb-alert>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">اضافة</button>
+			</form>
+		</nb-card-body>
+	</nb-card>
+</div>
