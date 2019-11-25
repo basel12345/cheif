@@ -53,4 +53,8 @@ export const MangerMenu: NbMenuItem[] = [
 			},
 		]
 	},
+	{
+		title: 'التقارير',
+		link: '/pages/manger/reports'
+	}
 ];

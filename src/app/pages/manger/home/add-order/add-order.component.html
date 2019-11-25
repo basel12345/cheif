@@ -1,8 +1,25 @@
-<div>
-	<nb-card>
-		<nb-card-header>اضافة الطلبات</nb-card-header>
-		<nb-card-body>
-			<form #frm="ngForm" (ngSubmit)="save(frm)">
+<nb-card>
+	<nb-card-header>اضافة الطلبات</nb-card-header>
+	<nb-card-body>
+		<div class="row">
+			<div class="col-md-4">
+				<button class="btn btn-primary btn-lg btn-block" (click)='addition()'>
+					اضافة طعام
+				</button>
+			</div>
+			<div class="col-md-4">
+				<button class="btn btn-primary btn-lg btn-block" (click)='addition()'>
+					اضافة مشروبات
+				</button>
+			</div>
+			<div class="col-md-4">
+				<button class="btn btn-primary btn-lg btn-block" (click)='addition()'>
+					اضافة خدمات
+				</button>
+			</div>
+		</div>
+
+		<!-- <form #frm="ngForm" (ngSubmit)="save(frm)">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
@@ -51,7 +68,145 @@
 					</div>
 				</div>
 				<button type="submit" (click)="addition()" class="btn btn-primary">اضافة</button>
-			</form>
-		</nb-card-body>
-	</nb-card>
+			</form> -->
+	</nb-card-body>
+</nb-card>
+
+<nb-card>
+	<nb-card-body>
+		<div>
+			<table class="table table-bordered" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>الصنف</th>
+						<th>القيمة</th>
+						<th>الكمية</th>
+						<th>الاجمالى</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- 
+						[(ngModel)]='value[i]'
+					-->
+					<tr *ngFor='let row of AllRows;let i = index; '>
+						<td>{{row.value}}</td>
+						<td>{{row.price}}</td>
+						<td>
+							<input (ngModelChange)='getTheQuantity()' class="form-control" type="number"
+								[(ngModel)]='row.quantity' name="" id="">
+						</td>
+						<td>{{row.price * row.quantity}}</td>
+						<td>
+							<button class="btn btn-danger" (click)='delete(i)'>
+								حذف
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-3">
+					<p>الاجمالى: <span>{{totalPrice}}</span></p>
+				</div>
+				<!-- <div class="col-md-3">
+					الاجمالى بعد الخصم : <span>{{totalInvoicePrice}}</span>
+				</div> -->
+			</div>
+		</div>
+
+		<form #frm="ngForm" (ngSubmit)="save(frm)">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="">نسبة الخصم</label>
+						<input (ngModelChange)='getDiscount($event)' [(ngModel)]='discount' name="Discount"
+							#Discount="ngModel" class="form-control" type="number" min="0" max="100" [range]="[0, 100]"
+							[ngClass]="{ 'is-invalid': frm.submitted && !Discount.valid }">
+						<span style="    position: absolute;
+									top:38px;
+									left: 55px;">%</span>
+
+						<div *ngIf="frm.submitted && !Discount.valid" class="invalid-feedback">
+							<div *ngIf="frm.submitted && Discount.errors?.range">
+								<nb-alert status="danger">
+									برجاء ادخل من 0 الي 100
+								</nb-alert>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="">المطلوب</label>
+						<input class="form-control" disabled [(ngModel)]='totalInvoicePrice' name="totalPrice"
+							type="number">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="">المدفوع</label>
+						<input (ngModelChange)='onPayEnterd($event)' [(ngModel)]='pay' name="payedMoney"
+							class="form-control" #payedMoney="ngModel" type="number"
+							[ngClass]="{ 'is-invalid': frm.submitted && !payedMoney.valid }" required>
+						<div *ngIf="frm.submitted && !payedMoney.valid" class="invalid-feedback">
+							<div *ngIf="frm.submitted && !payedMoney.valid">
+								<nb-alert status="danger"> برجاء إدخال
+									المبلغ المطلوب
+								</nb-alert>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="">المتبقي</label>
+						<input [(ngModel)]='stay' name="stay" disabled class="form-control" type="number">
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-3">
+					<button type="submit" class="btn btn-primary" (click)='Print_Report("reportName")'>الفاتورة</button>
+				</div>
+			</div>
+		</form>
+
+		<!-- <div class="container-fluid">
+
+		</div> -->
+
+	</nb-card-body>
+</nb-card>
+
+<div style="display: none;">
+	<table id="className">
+		<tbody>
+			<!-- 
+					[(ngModel)]='value[i]'
+				-->
+			<tr *ngFor='let row of AllRows;let i = index; '>
+				<td style="width:auto">{{row.value +'(' +row.quantity+'*'+ row.price+')'}}</td>
+
+				<td style="width:auto">{{row.price * row.quantity}}</td>
+
+			</tr>
+			<tr>
+				<td>Sub Total</td>
+				<td>{{totalInvoicePrice}}</td>
+			</tr>
+			<tr>
+				<td>VAT 14%</td>
+				<td>{{ (14/100)*totalInvoicePrice}}</td>
+			</tr>
+			<tr>
+				<th>Balance Due</th>
+				<th>{{totalInvoicePrice + (14/100)*totalInvoicePrice}}</th>
+			</tr>
+		</tbody>
+	</table>
 </div>

@@ -45,6 +45,10 @@ const routes: Routes = [
 			{
 				path: 'home',
 				loadChildren: './home/home.module#HomeModule'
+			},	
+			{
+				path: 'reports',
+				loadChildren: './reports/reports.module#ReportsModule'
 			}	
 		]
 	}	 

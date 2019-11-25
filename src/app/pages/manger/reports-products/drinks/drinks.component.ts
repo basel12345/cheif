@@ -9,7 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 
 export class DrinksComponent implements OnInit {
-	
+
 	Filter = {
 		product: null,
 		cost: null,
@@ -20,6 +20,9 @@ export class DrinksComponent implements OnInit {
 
 	ngOnInit() {
 	}
-	
+
+	Search() {
+
+	}
 
 }

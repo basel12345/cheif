@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { HomeComponent } from './home.component';
 import { AddOrderComponent } from './add-order/add-order.component';
+import { AddOrderListComponent } from './add-order/add-order-list/add-order-list.component';
+import { CustomFormsModule } from 'ng2-validation';
 
 const routes: Routes = [
 	{
@@ -23,12 +25,17 @@ export const Routing = RouterModule.forChild(routes);
 		CommonModule,
 		RouterModule,
 		ThemeModule,
-		Routing],
+		Routing,
+		CustomFormsModule
+	],
 	declarations: [
 		HomeComponent,
-		AddOrderComponent
+		AddOrderComponent,
+		AddOrderListComponent
 	],
-	entryComponents: [],
+	entryComponents: [
+		AddOrderListComponent
+	],
 	providers: []
 })
 export class HomeModule { }

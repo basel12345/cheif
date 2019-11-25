@@ -9,8 +9,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 
 export class ServicesComponent implements OnInit {
-	
-	Filter = { 
+
+	Filter = {
 		product: null,
 		cost: null,
 		price: null,
@@ -21,6 +21,8 @@ export class ServicesComponent implements OnInit {
 
 	ngOnInit() {
 	}
-	
 
+	Search() {
+
+	}
 }
