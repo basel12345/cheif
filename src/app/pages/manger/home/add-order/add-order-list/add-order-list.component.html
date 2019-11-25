@@ -1,0 +1,19 @@
+<nb-card>
+	<nb-card-header>اضافة صنف</nb-card-header>
+	<nb-card-body>
+		<div class="row">
+			<div class="col-md-3"  *ngFor="let ch of checkboxes;let i= index;">
+				<div class="form-group validation-checkboxes">
+					<nb-checkbox (ngModelChange)='getValueChange($event,ch)' status="success" class="form-control"
+						[(ngModel)]="ch.selected" type="checkbox" value={{ch.value}} id={{ch.value}} name="num">
+						{{ch.value}}
+					</nb-checkbox>
+				</div>
+			</div>
+		</div>
+
+		<button class="btn btn-primary" (click)='save()'>
+			حفظ
+		</button>
+	</nb-card-body>
+</nb-card>
