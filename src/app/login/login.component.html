@@ -1,0 +1,71 @@
+<div class="limiter">
+	<div class="container-login100">
+		<div class="login100-more" style="background-image: url('../../assets/images/69766810_391554271558633_5436316827271561216_n.jpg');"></div>
+
+		<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+			<form class="login100-form validate-form" (ngSubmit)="login(frm)" #frm="ngForm">
+				<span class="login100-form-title p-b-59">
+					تسجيل الدخول
+				</span>
+
+				<div [class.alert-validate]="!email.valid && email.touched" class="wrap-input100 validate-input"
+					data-validate="Valid email is required: ex@abc.xyz">
+					<input class="input100" email #email="ngModel" type="email" placeholder="البريد الالكتروني"
+						[(ngModel)]='authUserData.email' id="email" name="email"
+						[ngClass]="{ 'is-invalid': frm.submitted && !email.valid }" required>
+					<span class="focus-input100"></span>
+					<div *ngIf="frm.submitted && !email.valid" class="text-danger">
+						<div *ngIf="frm.submitted && email.errors?.required">برجاء إدخال البريد الالكتروني</div>
+						<div *ngIf="frm.submitted && email.errors?.email"> البريد الالكتروني غير صحيح</div>
+					</div>
+				</div>
+
+				<div [class.alert-validate]="!password.valid && password.touched" class="wrap-input100 validate-input"
+					data-validate="Password is required">
+					<input class="input100" #password="ngModel" type="password" placeholder="كلمة السر"
+						[(ngModel)]='authUserData.password' id="password" name="password"
+						[ngClass]="{ 'is-invalid': frm.submitted && !password.valid }" required>
+					<span class="focus-input100"></span>
+					<div *ngIf="frm.submitted && !password.valid" class="text-danger">
+						<div *ngIf="frm.submitted && !password.valid">برجاء إدخال كلمة السر</div>
+					</div>
+
+				</div>
+
+				<div class="container-login100-form-btn mb-5">
+					<div class="wrap-login100-form-btn mx-auto">
+						<div class="login100-form-bgbtn"></div>
+						<button class="login100-form-btn">
+							دخـــول
+						</button>
+					</div>
+				</div>
+
+				<!-- <div class="container-login100-form-btn">
+					<a routerLink="/contact-us" routerLinkActive="active"
+						class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+						<i class="fa fa-long-arrow-left m-r-5"></i>
+						تواصل معنا
+					</a>
+					<a routerLink="/forgetpassword" routerLinkActive="active"
+						class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+						<i class="fa fa-long-arrow-left m-r-5"></i>
+						نسيت كلمة السر
+					</a>
+				</div>
+				<div class="container-login100-form-btn">
+					<a href="https://info.quizzo-eg.com/" target="_blank"
+						class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+						<i class="fa fa-long-arrow-left m-r-5"></i>
+						عن التطبيق
+					</a>
+					<a routerLink="/support" routerLinkActive="active"
+						class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+						<i class="fa fa-long-arrow-left m-r-5"></i>
+						الدعم الفنى
+					</a>
+				</div> -->
+			</form>
+		</div>
+	</div>
+</div>
