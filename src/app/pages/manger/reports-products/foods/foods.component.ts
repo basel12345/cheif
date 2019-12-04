@@ -1,6 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,14 +15,35 @@ export class FoodsComponent implements OnInit {
 		price: null,
 		ingredients: null,
 	}
+	Foods: any;
+	FilteredRows: any;
 
-	constructor() { }
+	constructor(
+		private route: ActivatedRoute
+	) { }
 
 	ngOnInit() {
+		this.route.data.subscribe(res => {
+			this.Foods = res.getAllFoods;
+			this.filterData(this.Filter);
+		})
 	}
 
-	Search() {
 
+
+	Search() {
+		this.filterData(this.Filter);
+	}
+
+	filterData(filter) {
+		this.FilteredRows = this.Foods.filter((row) => {
+			return (
+				((filter.product === null) || (row.product.toLowerCase().indexOf(filter.product.toLowerCase()) > -1)) &&
+				((filter.cost === null) || (row.cost === filter.cost)) &&
+				((filter.price === null) || (row.price === filter.price)) &&
+				((filter.ingredients === null) || (row.ingredients.toLowerCase().indexOf(filter.ingredients.toLowerCase()) > -1))
+			);
+		})
 	}
 
 }

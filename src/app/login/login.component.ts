@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './serivce/login.service';
+import { Router } from '@angular/router';
 
 @Component({
 	templateUrl: './login.component.html',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
 		password: null
 	};
 	constructor(
-		private service: LoginService 
+		private service: LoginService,
+		private router: Router
 	) {
 	}
 
@@ -21,7 +23,11 @@ export class LoginComponent implements OnInit {
 
 	login(frm) {
 		this.service.Login(this.authUserData).subscribe(res => {
-			console.log(res)
+			if(frm.valid) {
+				console.log(res)
+				localStorage.setItem('Token', res.token);
+				this.router.navigate(['pages/manger/home']);
+			}
 		})
 	}
 }

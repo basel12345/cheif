@@ -17,13 +17,14 @@
 						<div class="col-sm-3">
 							<div class="form-group">
 								<label for="cost"> سعر تكلفة الصنف</label>
-								<input type="text" id="cost" [(ngModel)]="Filter.cost" name="cost" class="form-control">
+								<input type="number" id="cost" [(ngModel)]="Filter.cost" name="cost"
+									class="form-control">
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
 								<label for="price"> سعر البيع</label>
-								<input type="text" id="price" [(ngModel)]="Filter.price" name="price"
+								<input type="number" id="price" [(ngModel)]="Filter.price" name="price"
 									class="form-control">
 							</div>
 						</div>
@@ -58,14 +59,14 @@
 							<th>المكونات</th>
 						</tr>
 					</thead>
-					<!-- <tbody>
-							<tr> 
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody> -->
+					<tbody>
+						<tr *ngFor="let res of FilteredRows">
+							<td>{{res.product}}</td>
+							<td>{{res.cost}}</td>
+							<td>{{res.price}}</td>
+							<td>{{res.ingredients}}</td>
+						</tr>
+					</tbody>
 				</table>
 				<!-- <button class="btn btn-success ml-1 mr-1" (click)="print()">طباعة</button> -->
 			</nb-card-body>

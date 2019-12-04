@@ -1,6 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { AddFoodService } from '../../services/add-food.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 @Component({
@@ -15,16 +15,36 @@ export class AddFoodComponent implements OnInit {
 		price: null,
 		ingredients: null,
 	}
-	constructor() { }
+	constructor(
+		private service: AddFoodService
+	) { }
 
 	ngOnInit() {
 	}
 
 	save(frm) {
 		if (frm.valid) {
-			console.log(this.Food)
-			frm.submitted = false;
-			frm.reset();
+			this.service.addFoods(this.Food).subscribe(res => {
+				if (res["status"] == true) {
+					Swal.fire({
+						title: 'Success',
+						text: res["message"],
+						type: 'success',
+						icon: 'success',
+						confirmButtonText: 'Ok'
+					});
+					frm.submitted = false;
+					frm.reset();
+				} else if (res["status"] == false) {
+					Swal.fire({
+						title: 'Falid to save the drink',
+						text: res["message"],
+						type: 'error',
+						icon: 'error',
+						confirmButtonText: 'Ok'
+					});
+				}
+			})
 		}
 	}
 

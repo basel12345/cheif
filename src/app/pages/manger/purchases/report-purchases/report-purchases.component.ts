@@ -1,6 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -15,17 +16,18 @@ export class ReportPurchasesComponent implements OnInit {
 		maxDate: null
 	}
 	total: any;
-	Purchases = [
-		{ date: "20-8-2019", value: 20, purchases: "dfdsbjhdsfjds" },
-		{ date: "25-8-2019", value: 25, purchases: "dfdsbjhdsfjds" },
-		{ date: "29-8-2019", value: 29, purchases: "dfdsbjhdsfjds" },
-	]
 	FilteredRows: any;
+	Purchases: any;
 
-	constructor() { }
+	constructor(
+		private route:ActivatedRoute
+	) { }
 
 	ngOnInit() {
-		this.filterdData(this.Filter);
+		this.route.data.subscribe(res => {
+			this.Purchases = res.getAllPurchase;
+			this.filterdData(this.Filter);
+		})
 	}
 
 	getTotalValue(value){

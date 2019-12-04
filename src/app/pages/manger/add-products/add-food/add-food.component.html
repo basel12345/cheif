@@ -19,7 +19,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="cost">سعر تكلفة الصنف</label>
-							<input type="text" class="form-control" id="cost" #cost="ngModel" [(ngModel)]="Food.cost"
+							<input type="number" class="form-control" id="cost" #cost="ngModel" [(ngModel)]="Food.cost"
 								name="cost" [ngClass]="{ 'is-invalid': frm.submitted && !cost.valid }" required>
 							<div *ngIf="frm.submitted && !cost.valid" class="invalid-feedback">
 								<nb-alert status="danger" *ngIf="frm.submitted && !cost.valid"> برجاء إدخال سعر تكلفة
@@ -32,7 +32,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="price">سعر البيع</label>
-							<input type="text" class="form-control" id="price" #price="ngModel"
+							<input type="number" class="form-control" id="price" #price="ngModel"
 								[(ngModel)]="Food.price" name="price"
 								[ngClass]="{ 'is-invalid': frm.submitted && !price.valid }" required>
 							<div *ngIf="frm.submitted && !price.valid" class="invalid-feedback">
