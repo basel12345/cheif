@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
 	login(frm) {
 		this.service.Login(this.authUserData).subscribe(res => {
 			if(frm.valid) {
-				console.log(res)
 				localStorage.setItem('Token', res.token);
 				this.router.navigate(['pages/manger/home']);
 			}

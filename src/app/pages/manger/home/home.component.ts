@@ -1,8 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -11,31 +8,25 @@ import { Router } from '@angular/router';
 
 
 export class HomeComponent implements OnInit {
-	Table = [
-		{ id: 1 },
-		{ id: 2 },
-		{ id: 5 },
-		{ id: 6 },
-		{ id: 7 },
-		{ id: 8 },
-		{ id: 9 },
-		{ id: 10 },
-		{ id: 11 },
-		{ id: 12 },
-		{ id: 13 },
-		{ id: 14 },
-		{ id: 15 },
-	]
+	Table: any;
+
 	constructor(
-		private modalService: NgbModal,
-		private router: Router
+		private router: Router,
+		private route:ActivatedRoute
 	) { }
 
 	ngOnInit() {
+		this.route.data.subscribe(res => {
+			this.Table = res.getAllTable;
+			console.log(this.Table)
+
+		})
 	}
 
-	addorder() {
-		this.router.navigate(['/pages/manger/home/add-order']);
+	addOrder(id) {
+		this.router.navigate([`/pages/manger/home/add-order/${id}`]);
 	}
+
+	
  
 }

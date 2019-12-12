@@ -1,14 +1,13 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
-import { FoodService } from '../../../services/foods.service';
+import { ServiceService } from '../../../services/service.service';
 
 @Component({
-	templateUrl: './add-order-list.component.html',
+	templateUrl: './add-services-list.component.html',
 })
 
 
-export class AddOrderListComponent implements OnInit {
+export class AddServicesListComponent implements OnInit {
 	Order = {
 		name: null,
 		value: null,
@@ -20,11 +19,11 @@ export class AddOrderListComponent implements OnInit {
 
 	constructor(
 		private activeModal: NgbActiveModal,
-		private service: FoodService
+		private service: ServiceService
 	) { }
 
 	ngOnInit() {
-		this.service.getAllFoods().subscribe(res => {
+		this.service.getAllServices().subscribe(res => {
 			this.checkboxes = res;
 		})
 	}

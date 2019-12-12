@@ -9,15 +9,15 @@
 					<div class="row">
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="minDate">من تاريخ</label>
-								<input type="date" id="minDate" [(ngModel)]="Filter.minDate" name="minDate"
+								<label for="name">اسم الكاشير</label>
+								<input type="text" id="name" [(ngModel)]="Filter.name" name="name"
 									class="form-control">
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="maxDate"> الي تاريخ</label>
-								<input type="date" id="maxDate" [(ngModel)]="Filter.maxDate" name="maxDate"
+								<label for="numberTable">رقم الطاوله</label>
+								<input type="number" id="numberTable" [(ngModel)]="Filter.numberTable" name="numberTable"
 									class="form-control">
 							</div>
 						</div>
@@ -39,27 +39,25 @@
 				<table class="table table-bordered" cellspacing="0" width="100%">
 					<thead>
 						<tr>
-							<th>الرقم</th>
+							<!-- <th>الرقم</th> -->
 							<th>رقم الفاتوره </th>
 							<th>رقم الطاولة </th>
-							<th>التاريخ </th>
-							<th>الوقت</th>
+							<th>التاريخ و الوقت </th>
 							<th>اسم الكاشير</th>
 							<th>الاجمالي</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr *ngFor="let res of Reports">
-							<td>{{res.number}}</td>
+						<tr *ngFor="let res of FilteredRows">
+							<!-- <td>{{res.number}}</td> -->
 							<td>
-								<button (click)='invoiceDetails()' type="button" class="btn btn-success btn-lg"
-									id="{{res.numberBill}}">{{res.numberBill}}</button>
+								<button (click)='invoiceDetails(res)' type="button" class="btn btn-success btn-lg"
+									id="{{res._id}}">{{res.billNumber}}</button>
 							</td>
-							<td>{{res.tableNumber}}</td>
-							<td>{{res.date}}</td>
-							<td>{{res.time}}</td>
+							<td>{{res.table.numberTable}}</td>
+							<td>{{res.createdAt}}</td>
 							<td>{{res.name}}</td>
-							<td>{{res.total}}</td>
+							<td>{{res.required}}</td>
 						</tr>
 					</tbody>
 				</table>

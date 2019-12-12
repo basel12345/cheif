@@ -31,7 +31,6 @@ export class ReportPurchasesComponent implements OnInit {
 	}
 
 	getTotalValue(value){
-	
 		this.total += value; 
 	}
 

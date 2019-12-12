@@ -37,7 +37,7 @@ export class AddFoodComponent implements OnInit {
 					frm.reset();
 				} else if (res["status"] == false) {
 					Swal.fire({
-						title: 'Falid to save the drink',
+						title: 'Falid to save the food',
 						text: res["message"],
 						type: 'error',
 						icon: 'error',

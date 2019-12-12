@@ -5,6 +5,6 @@ export class Configuration {
 	HostUrl: string;
 
 	constructor() {
-		this.HostUrl = 'http://localhost:8000/';
+		this.HostUrl = 'http://localhost:3000/';
 	}
 }

@@ -36,7 +36,7 @@ export class AddPurchasesComponent implements OnInit {
 					frm.reset();
 				} else if (res['status'] == false) {
 					Swal.fire({
-						title: 'Falid to save the drink',
+						title: 'Falid to save the purchase',
 						text: res["message"],
 						type: 'error',
 						icon: 'error',

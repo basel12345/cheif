@@ -2,24 +2,15 @@
 	<nb-card-body>
 		<table class="table table-bordered" cellspacing="0" width="100%">
 			<tbody>
-				<tr *ngFor='let row of AllRows;let i = index; '>
-					<td style="width: 50%">{{row.value +'(' +row.quantity+'*'+ row.price+')'}}</td>
-
-					<td>{{row.price * row.quantity}}</td>
-
-				</tr>
 				<tr>
-					<td>Sub Total</td>
-					<td>{{totalPrice}}</td>
+					<td style="width: 100%" *ngFor="let res of order">
+						{{res}}
+					</td>
 				</tr>
-				<tr>
-					<td>VAT 14%</td>
-					<td>{{ (14/100)*totalPrice}}</td>
-				</tr>
-				<tr>
-					<th>Balance Due</th>
-					<th>{{totalPrice + (14/100)*totalPrice}}</th>
-				</tr>
+				<!-- <tr *ngFor="let row of AllRows">
+					<td>{{row.name}}</td>
+					<td></td>
+				</tr> -->
 			</tbody>
 		</table>
 		<button class="btn btn-primary" (click)='close()'>

@@ -1,5 +1,6 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ReportsService } from '../../services/reports.service';
 
 @Component({
 	templateUrl: './invoice-details.component.html',
@@ -9,29 +10,28 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class InvoiceDetailsComponent implements OnInit {
 	AllRows: any;
 	totalPrice: number;
+	@Input() id;
+	order: any;
 	constructor(
 		private activeModal: NgbActiveModal,
+		private service: ReportsService
 	) { }
 
 	ngOnInit() {
-		this.AllRows = [
-			{ id: 1, value: "father", price: 25, quantity: 2, selected: true },
-			{ id: 5, value: "mother", price: 66, quantity: 1, selected: true },
-			{ id: 2, value: "mother", price: 20, quantity: 1, selected: true },
-			{ id: 6, value: "فاهيتا فراخ", price: 70, quantity: 3, selected: true },
-			{ id: 3, value: "mother", price: 30, quantity: 1, selected: true },
-			{ id: 4, value: "mother", price: 60, quantity: 1, selected: true }
-		]
-
-		this.getTotalPrice(this.AllRows);
+		this.service.getOneOrder(this.id).subscribe(res => {
+			this.AllRows = res;
+			this.order = this.AllRows["order"];
+			console.log(this.AllRows)
+		})
+		// this.getTotalPrice(this.AllRows);
 	}
 
-	getTotalPrice(array) {
-		this.totalPrice = 0;
-		array.forEach(element => {
-			this.totalPrice += element.price * element.quantity;
-		});
-	}
+	// getTotalPrice(array) {
+	// 	this.totalPrice = 0;
+	// 	array.forEach(element => {
+	// 		this.totalPrice += element.price * element.quantity;
+	// 	});
+	// }
 
 	close() {
 		this.activeModal.dismiss()

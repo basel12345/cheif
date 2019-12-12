@@ -1,9 +1,13 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddOrderListComponent } from './add-order-list/add-order-list.component'
+import { AddServicesListComponent } from './add-services-list/add-services-list.component'
+import { AddDrinksListComponent } from './add-drinks-list/add-drinks-list.component'
+import { OrderService } from '../../services/order.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { HomeService } from '../../services/home.service';
+
 @Component({
 	templateUrl: './add-order.component.html',
 })
@@ -17,20 +21,51 @@ export class AddOrderComponent implements OnInit {
 	totalInvoicePrice: any;
 	pay: any;
 	stay: any;
+	table_id: any;
+	product: any;
+	billNumber: any;
+	name: any;
+	Table: any;
 	constructor(
 		private router: Router,
 		private modalService: NgbModal,
+		private route: ActivatedRoute,
+		private service: OrderService,
+		private homeService:HomeService
 	) { }
 
 	ngOnInit() {
+		this.route.params.subscribe(res => {
+			this.table_id = res.id;
+		})
 	}
 
-	// addition() {
-	// 	this.router.navigate(['/pages/manger/home'])
-	// }
-
-	addition() {
+	additionFood() {
 		const model_ref = this.modalService.open(AddOrderListComponent, { size: 'lg' })
+		model_ref.result.then((savedRow) => {
+			this.AllRows = this.AllRows.concat(savedRow);
+			this.getTotalPrice(this.AllRows);
+			this.getDiscount(this.discount);
+			this.onPayEnterd(this.pay);
+		}, () => {
+		});
+	}
+
+
+
+	additionServices() {
+		const model_ref = this.modalService.open(AddServicesListComponent, { size: 'lg' })
+		model_ref.result.then((savedRow) => {
+			this.AllRows = this.AllRows.concat(savedRow);
+			this.getTotalPrice(this.AllRows);
+			this.getDiscount(this.discount);
+			this.onPayEnterd(this.pay);
+		}, () => {
+		});
+	}
+
+	additionDrinks() {
+		const model_ref = this.modalService.open(AddDrinksListComponent, { size: 'lg' })
 		model_ref.result.then((savedRow) => {
 			this.AllRows = this.AllRows.concat(savedRow);
 			this.getTotalPrice(this.AllRows);
@@ -66,9 +101,41 @@ export class AddOrderComponent implements OnInit {
 		this.stay = param - this.totalInvoicePrice;
 	}
 
-	save(frm) {
-		if (frm.valid == true) {
+	update(id) {
+		this.homeService.updateTable(id,2).subscribe(res => {
+			this.route.data.subscribe(res => {
+				this.Table = res.getAllTable;
+			})
+		})
+	}
 
+	save(frm) {
+		let newArr = []
+		this.AllRows.forEach(element => {
+			newArr.push(element.product)
+		});
+		if(frm.valid) {
+			this.service.addOrders(this.AllRows,this.discount,this.totalInvoicePrice,this.stay,this.billNumber,this.name,this.table_id).subscribe(res => {
+				if (res['status'] == true) {
+					Swal.fire({
+						title: 'Success',
+						text: res["message"],
+						type: 'success',
+						icon: 'success',
+						confirmButtonText: 'Ok'
+					});
+					frm.submitted = false;
+					frm.reset();
+				} else if (res['status'] == false) {
+					Swal.fire({
+						title: 'Falid to save the purchase',
+						text: res["message"],
+						type: 'error',
+						icon: 'error',
+						confirmButtonText: 'Ok'
+					});
+				}
+			})
 		}
 	}
 
@@ -78,14 +145,10 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	Print_Report(reportName) {
-		console.log(this.AllRows)
-		// const school = this.loginService.getSchoolData();
-		// let School = JSON.parse(school);
-		// console.log(this.value)
+		this.update(this.table_id);
 		let date = new Date()
 		let printContents, popupWin;
 		printContents = document.getElementById('className').innerHTML;
-		// console.log(printContents.getElementByTagName('tbody'))
 		popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
 		popupWin.document.open();
 		popupWin.document.write(`
