@@ -26,6 +26,9 @@ export class AddOrderComponent implements OnInit {
 	billNumber: any;
 	name: any;
 	Table: any;
+	status: any;
+	order: any;
+	orders: any;
 	constructor(
 		private router: Router,
 		private modalService: NgbModal,
@@ -36,8 +39,31 @@ export class AddOrderComponent implements OnInit {
 
 	ngOnInit() {
 		this.route.params.subscribe(res => {
-			this.table_id = res.id;
+			this.status = res.status;
 		})
+		this.route.params.subscribe(res => {
+			this.table_id = res.id;	
+		})
+		if(this.status == 2) {
+			this.homeService.getOneTable(this.table_id).subscribe(res => {
+				console.log(res.order)
+				this.order = res.order[0];
+				this.discount = this.order.discoount;
+				this.billNumber = this.order.billNumber;
+				this.pay = this.order.pay;
+				this.totalInvoicePrice = this.order.required;
+				this.stay = this.order.residual;
+				this.name = this.order.name;
+				this.totalPrice = this.order.totalPrice;
+				this.orders = this.order.order;
+				this.id = this.order._id;
+				console.log(this.id)
+				console.log(this.orders)
+			})
+		}
+	}
+	id(id: any) {
+		throw new Error("Method not implemented.");
 	}
 
 	additionFood() {
@@ -115,7 +141,8 @@ export class AddOrderComponent implements OnInit {
 			newArr.push(element.product)
 		});
 		if(frm.valid) {
-			this.service.addOrders(this.AllRows,this.discount,this.totalInvoicePrice,this.stay,this.billNumber,this.name,this.table_id).subscribe(res => {
+			this.service.addOrders(this.AllRows,this.discount,this.totalInvoicePrice,this.stay,this.billNumber,this.name,this.pay,this.totalPrice,this.table_id).subscribe(res => {
+				console.log(res)
 				if (res['status'] == true) {
 					Swal.fire({
 						title: 'Success',
@@ -145,7 +172,9 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	Print_Report(reportName) {
-		this.update(this.table_id);
+		this.service.deleteOrder(this.table_id,this.id).subscribe(res => {
+			console.log(res)
+		})
 		let date = new Date()
 		let printContents, popupWin;
 		printContents = document.getElementById('className').innerHTML;

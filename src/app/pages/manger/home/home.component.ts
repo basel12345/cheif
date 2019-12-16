@@ -24,7 +24,11 @@ export class HomeComponent implements OnInit {
 	}
 
 	addOrder(id) {
-		this.router.navigate([`/pages/manger/home/add-order/${id}`]);
+		this.router.navigate([`/pages/manger/home/add-order/${id}/1`]);
+	}
+
+	viewOrder(id) {
+		this.router.navigate([`/pages/manger/home/add-order/${id}/2`]);
 	}
 
 	

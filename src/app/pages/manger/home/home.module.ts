@@ -10,7 +10,6 @@ import { CustomFormsModule } from 'ng2-validation';
 import { getAllTableResolver } from "../resolvers/getAllTable.resolver";
 import { AddDrinksListComponent } from './add-order/add-drinks-list/add-drinks-list.component';
 import { AddServicesListComponent } from './add-order/add-services-list/add-services-list.component';
-import { getAllFoodsResolver } from '../resolvers/getAllFoods.resolver';
 
 const routes: Routes = [
 	{
@@ -21,7 +20,7 @@ const routes: Routes = [
 		}
 	},
 	{
-		path: 'add-order/:id',
+		path: 'add-order/:id/:status',
 		component: AddOrderComponent
 	}
 ];
@@ -40,7 +39,7 @@ export const Routing = RouterModule.forChild(routes);
 		AddOrderComponent,
 		AddOrderListComponent,
 		AddDrinksListComponent,
-		AddServicesListComponent
+		AddServicesListComponent,
 	],
 	entryComponents: [
 		AddOrderListComponent,

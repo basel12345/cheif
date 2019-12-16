@@ -12,7 +12,7 @@
 			</nb-card-body>
 			<nb-card-body>
 				<div *ngFor="let res of Table" style="display: inline-block">
-					<button *ngIf="res.status == 2" type="button" class="btn btn-danger btn-lg mx-1" (click)="addOrder(res._id)"
+					<button *ngIf="res.status == 2" type="button" class="btn btn-danger btn-lg mx-1" (click)="viewOrder(res._id)"
 					>{{res.numberTable}}</button>
 				</div>
 			</nb-card-body>

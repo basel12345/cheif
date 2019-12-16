@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card *ngIf="status == 1">
 	<nb-card-header>اضافة الطلبات</nb-card-header>
 	<nb-card-body>
 		<div class="row">
@@ -23,7 +23,7 @@
 
 <nb-card>
 	<nb-card-body>
-		<div>
+		<div *ngIf="status == 1">
 			<table class="table table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
@@ -56,6 +56,27 @@
 			</table>
 		</div>
 
+		<div *ngIf="status == 2">
+			<table class="table table-bordered" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>الصنف</th>
+						<th>القيمة</th>
+						<th>الكمية</th>
+						<th>الاجمالى</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor='let row of orders'>
+						<td>{{row.product}}</td>
+						<td>{{row.price}}</td>
+						<td>{{row.quantity}}</td>
+						<td>{{row.price * row.quantity}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-3">
@@ -72,9 +93,8 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label for="">رقم الفاتورة</label>
-						<input [(ngModel)]='billNumber' name="billNumber"
-							class="form-control" #billNumbers="ngModel" type="number"
-							[ngClass]="{ 'is-invalid': frm.submitted && !billNumbers.valid }" required>
+						<input [(ngModel)]='billNumber' name="billNumber" class="form-control" #billNumbers="ngModel"
+							type="number" [ngClass]="{ 'is-invalid': frm.submitted && !billNumbers.valid }" required>
 						<div *ngIf="frm.submitted && !billNumbers.valid" class="invalid-feedback">
 							<div *ngIf="frm.submitted && !billNumbers.valid">
 								<nb-alert status="danger"> برجاء إدخال
@@ -87,8 +107,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label for="">اسم الكاشير</label>
-						<input [(ngModel)]='name' name="name"
-							class="form-control" #nameValid="ngModel" type="text"
+						<input [(ngModel)]='name' name="name" class="form-control" #nameValid="ngModel" type="text"
 							[ngClass]="{ 'is-invalid': frm.submitted && !nameValid.valid }" required>
 						<div *ngIf="frm.submitted && !nameValid.valid" class="invalid-feedback">
 							<div *ngIf="frm.submitted && !nameValid.valid">
@@ -148,11 +167,11 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6" *ngIf="status == 2">
 					<button type="submit" class="btn btn-primary" (click)='Print_Report("reportName")'>الفاتورة</button>
 				</div>
-				<div class="col-md-6">
-					<button type="submit" class="btn btn-primary" style="float: left" (click)='save(frm)'>طلب</button>
+				<div class="col-md-6" *ngIf="status == 1">
+					<button type="submit" class="btn btn-primary" (click)='save(frm)'>طلب</button>
 				</div>
 			</div>
 		</form>

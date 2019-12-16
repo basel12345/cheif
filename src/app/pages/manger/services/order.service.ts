@@ -16,7 +16,7 @@ export class OrderService {
 	hostUrl: string = this.configuration.HostUrl;
 	apiUrl: string = this.hostUrl + 'order/';
 	
-	addOrders(order,discoount,required,residual,billNumber,name,id) {
+	addOrders(order,discoount,required,residual,billNumber,name,pay,totalPrice,id) {
 		const url = this.apiUrl + `addOrders/${id}`;
 		const model = {
 			order,
@@ -24,9 +24,15 @@ export class OrderService {
 			required,
 			residual,
 			billNumber,
-			name
+			name,
+			pay,
+			totalPrice
 		}
 		return this.http.post<any>(url,model);
 	}
 
+	deleteOrder(tableId,id) {
+		const url = this.apiUrl + `deleteOrder/${tableId}/${id}`;
+		return this.http.delete<any>(url);
+	}
 }

@@ -21,6 +21,11 @@ export class HomeService {
 		return this.http.get<any>(url);
 	}
 
+	getOneTable(id) {
+		const url = this.apiUrl + `getOneTable/${id}`;
+		return this.http.get<any>(url);
+	}
+
 	updateTable(id,status) {
 		const url = this.apiUrl + `updateStatusTable/${id}`;
 		return this.http.put<any>(url,status);
