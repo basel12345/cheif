@@ -39,7 +39,6 @@
 				<table class="table table-bordered" cellspacing="0" width="100%">
 					<thead>
 						<tr>
-							<!-- <th>الرقم</th> -->
 							<th>رقم الفاتوره </th>
 							<th>رقم الطاولة </th>
 							<th>التاريخ و الوقت </th>
@@ -49,7 +48,6 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let res of FilteredRows">
-							<!-- <td>{{res.number}}</td> -->
 							<td>
 								<button (click)='invoiceDetails(res)' type="button" class="btn btn-success btn-lg"
 									id="{{res._id}}">{{res.billNumber}}</button>

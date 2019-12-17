@@ -20,9 +20,14 @@ export class ReportsService {
 		const url = this.apiUrl + 'getAllOrder';
 		return this.http.get<any>(url);
 	}
+	
 	getOneOrder(id) {
 		const url = this.apiUrl + `getOneOrder/${id}`;
 		return this.http.get<any>(url);
 	}
 
+	getAllReport() {
+		const url = this.apiUrl + 'getAllReport';
+		return this.http.get<any>(url);
+	}
 }

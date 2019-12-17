@@ -27,8 +27,7 @@ export class reportsComponent implements OnInit {
 
 	ngOnInit() {
 		this.route.data.subscribe(res => {
-			this.Reports = res.getAllOrder;
-			console.log(this.Reports)
+			this.Reports = res.getAllReport;
 			this.filterData(this.Filter);
 		})
 	}
@@ -36,7 +35,7 @@ export class reportsComponent implements OnInit {
 	Search() {
 		this.filterData(this.Filter);
 	}
-
+   
 	filterData(filter) {
 		this.FilteredRows = this.Reports.filter((row) => {
 			return (
@@ -51,7 +50,6 @@ export class reportsComponent implements OnInit {
 		const toBeSavedRow = Object.assign({}, row);
 		const model_ref = this.modalService.open(InvoiceDetailsComponent, { size: 'lg' })
 		model_ref.componentInstance.id = toBeSavedRow._id;
-		console.log(model_ref.componentInstance.id)
 		model_ref.result.then(() => {
 			
 		}, () => {

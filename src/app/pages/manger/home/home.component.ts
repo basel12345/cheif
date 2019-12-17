@@ -18,8 +18,6 @@ export class HomeComponent implements OnInit {
 	ngOnInit() {
 		this.route.data.subscribe(res => {
 			this.Table = res.getAllTable;
-			console.log(this.Table)
-
 		})
 	}
 

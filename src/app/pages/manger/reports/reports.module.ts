@@ -5,14 +5,14 @@ import { CommonModule } from '@angular/common';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { reportsComponent } from './reports.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
-import { getAllOrderResolver } from '../resolvers/getAllOrder.resolver';
+import { getAllReportResolver } from '../resolvers/getAllReport.resolver';
 
 const routes: Routes = [
 	{
 		path: '',
 		component: reportsComponent,
 		resolve: {
-			getAllOrder: getAllOrderResolver
+			getAllReport: getAllReportResolver
 		}
 	}
 ];
@@ -32,7 +32,7 @@ export const Routing = RouterModule.forChild(routes);
 		InvoiceDetailsComponent
 	],
 	providers: [
-		getAllOrderResolver
+		getAllReportResolver
 	]
 })
 export class ReportsModule { }

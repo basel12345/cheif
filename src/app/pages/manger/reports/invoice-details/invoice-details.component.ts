@@ -21,7 +21,6 @@ export class InvoiceDetailsComponent implements OnInit {
 		this.service.getOneOrder(this.id).subscribe(res => {
 			this.AllRows = res;
 			this.order = this.AllRows["order"];
-			console.log(this.AllRows)
 		})
 		// this.getTotalPrice(this.AllRows);
 	}

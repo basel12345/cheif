@@ -46,7 +46,6 @@ export class AddOrderComponent implements OnInit {
 		})
 		if(this.status == 2) {
 			this.homeService.getOneTable(this.table_id).subscribe(res => {
-				console.log(res.order)
 				this.order = res.order[0];
 				this.discount = this.order.discoount;
 				this.billNumber = this.order.billNumber;
@@ -57,8 +56,6 @@ export class AddOrderComponent implements OnInit {
 				this.totalPrice = this.order.totalPrice;
 				this.orders = this.order.order;
 				this.id = this.order._id;
-				console.log(this.id)
-				console.log(this.orders)
 			})
 		}
 	}
@@ -142,7 +139,6 @@ export class AddOrderComponent implements OnInit {
 		});
 		if(frm.valid) {
 			this.service.addOrders(this.AllRows,this.discount,this.totalInvoicePrice,this.stay,this.billNumber,this.name,this.pay,this.totalPrice,this.table_id).subscribe(res => {
-				console.log(res)
 				if (res['status'] == true) {
 					Swal.fire({
 						title: 'Success',
@@ -173,7 +169,6 @@ export class AddOrderComponent implements OnInit {
 
 	Print_Report(reportName) {
 		this.service.deleteOrder(this.table_id,this.id).subscribe(res => {
-			console.log(res)
 		})
 		let date = new Date()
 		let printContents, popupWin;
